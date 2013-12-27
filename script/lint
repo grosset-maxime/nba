@@ -14,6 +14,16 @@ OPTIONS can be:
     --phpcs <absolute_path_to_phpcs>: absolute path to php code snifer"
 }
 
+# params {String}  string - String to print.
+# params {Integer} color  - Color of the printed string.
+# $color association :
+#   '1' => Red,
+#   '2' => Green,
+#   '3' => Yelow,
+#   '4' => Blue,
+#   '5' => Pink,
+#   '7' => White,
+#   '8' => Gray,
 function print_text () {
     local string=$1
     local color=$2
@@ -100,6 +110,8 @@ if [[ ${#files_js[@]} -gt 0 ]]; then
                     print_text 'Errors found, please fix these.' '1'
                 fi
                 exit 1
+            else
+                print_text "$file => No error." '2'
             fi
             cpt+=1
         fi
