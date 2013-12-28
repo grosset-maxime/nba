@@ -33,7 +33,10 @@ $_routes += array(
 // API - Scripts
 // -------------
 $_routes += array(
-
+    'getRandomNum_s' => array(
+        'isScript' => true,
+        'path' => '/api/script/getRandomNum.php'
+    ),
 );
 
 // Static - Views - Errors

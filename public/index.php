@@ -135,16 +135,10 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
         <?php echo $assetsRouteJs; ?>
     </head>
     <body>
-<?php require_once ROOT_DIR . '/static/header.phtml'; ?>
-
-<?php require_once ROOT_DIR . '/static/menu.phtml'; ?>
-
 <?php
 if (!empty($_routes[$_r]['path'])) {
     include_once ROOT_DIR . $_routes[$_r]['path'];
 }
 ?>
-
-<?php require_once ROOT_DIR . '/static/footer.phtml'; ?>
     </body>
 </html>

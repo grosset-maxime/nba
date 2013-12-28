@@ -10,11 +10,7 @@ curl([
     'use strict';
 
     function initView () {
-        var ctn = $('<div>').appendTo(document.body);
-
-        Nba.init({
-            root: ctn
-        });
+        Nba.init();
     }
 
     initView();

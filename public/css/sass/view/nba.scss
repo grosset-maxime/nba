@@ -3,9 +3,112 @@
 @import 'compass/css3';
 @import 'compass/css3/user-interface';
 
-$diapo_shuffle_ctn_options_height: 50px;
-
 .nba {
+    min-width: 100%;
+    min-height: 100%;
+
+    .top {
+        order: 1;
+        flex: 1;
+        align-self: auto;
+        min-width: 100%;
+        min-height: 40px;
+        max-height: 40px;
+        padding: 0 10px;
+        box-sizing: border-box;
+
+        .base_path_ctn {
+            order: 1;
+            flex: 1;
+            min-width: 0;
+
+            .label {
+                order: 1;
+                flex: 0;
+                min-width: 4.7em;
+            }
+
+            .selector_ctn {
+                order: 2;
+                flex: 1;
+
+                .selector {
+                    width: 98%;
+                    height: 2em;
+                    padding-left: 4px;
+                }
+            }
+
+            .generate_btn_ctn {
+                order: 3;
+                flex: 0;
+                min-width: 10em;
+            }
+        } // End .base_path_ctn
+
+        .opts_btn_ctn {
+            order: 2;
+            flex: 0;
+            min-width: 32px;
+        }
+
+        .opts_btn {
+            width: 32px;
+            height: 32px;
+            background: white;
+            cursor: pointer;
+        }
+    } // End .top
+
+    .middle {
+        order: 2;
+        flex: 1;
+        min-width: 0;
+        margin-top: -25px;
+        font-family: Tahoma, Times, 'Times New Roman';
+
+        .random_num {
+            font-size: 10.625em;
+        }
+
+        .separator,
+        .range_max_num {
+            font-size: 4em;
+        }
+
+        .random_path_ctn {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            background-color: #fefefe;
+            @include border-radius(3px);
+
+            .random_path_temp,
+            .random_path {
+                font-size: 0.6875em;
+                color: #fefefe;
+                font-family: Tahoma, Times, 'Times New Roman';
+            }
+
+            .random_path {
+                display: none;
+                color: #888;
+                padding: 0;
+                border: 0;
+                outline: 0;
+                padding: 6px;
+                background-color: transparent;
+            }
+        }
+    } // End .middle
+
+    .bottom {
+        order: 3;
+        flex: 1;
+        min-width: 0;
+    }
+
+
+
     .ctn_loading {
         display: none;
         position: fixed;

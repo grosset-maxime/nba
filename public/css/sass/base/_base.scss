@@ -1,4 +1,19 @@
 
-body {
-    background-color: #cacaca;
+html, body {
+    height: 100%;
+}
+
+.flex_col, .flex_row {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.flex_col {
+    flex-flow: column nowrap;
+}
+
+.flex_row {
+    flex-flow: row nowrap;
 }

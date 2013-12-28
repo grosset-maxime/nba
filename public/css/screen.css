@@ -68,6 +68,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 2, sass/base/_base.scss */
-body {
-  background-color: #cacaca;
+html, body {
+  height: 100%;
+}
+
+/* line 6, sass/base/_base.scss */
+.flex_col, .flex_row {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+/* line 13, sass/base/_base.scss */
+.flex_col {
+  flex-flow: column nowrap;
+}
+
+/* line 17, sass/base/_base.scss */
+.flex_row {
+  flex-flow: row nowrap;
 }
