@@ -201,6 +201,10 @@ define([
                 randomPathCtn
             ).appendTo(middleCtn);
 
+            middleCtn.click(function () {
+                randomPathCtn.select();
+            });
+
             // Bottom
             // ------
             historyCtn = els.history = $('<div>', {
