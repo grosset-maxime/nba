@@ -138,7 +138,9 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
             baseUrl: "/js",
             paths: {
                 'jquery': 'vendor/jquery/jquery-2.0.0',
-                'jquery-ui': 'vendor/jquery-ui/jquery-ui'
+                'jquery-ui': 'vendor/jquery-ui/jquery-ui',
+                'jquery-inherit': 'vendor/jquery-inherit/jquery-inherit',
+                'PM': 'vendor/PM'
             }
         };
         </script>

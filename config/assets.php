@@ -20,15 +20,8 @@ $_assets = array(
         'vendor/jquery-inherit/jquery-inherit',
         '/vendor/curl/curl',
 
-        // PF
-        // 'PM/Core/Core',
-
-        // // PF Utils
-        // 'PM/Utils/String',
-        // 'PM/Utils/Utils',
-
-        // // PM Start (must be the last)
-        // 'PM/Start',
+        // App
+        'App/start',
     ),
 
     // CSS
