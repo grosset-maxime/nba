@@ -5,8 +5,9 @@
 
 define([
     'jquery',
+    'App/Cmp/History',
     'js!jquery-ui'
-], function ($) {
+], function ($, History) {
     'use strict';
 
 
@@ -345,9 +346,11 @@ define([
         /**
          *
          */
-        // addHistory: function (data) {
+        addHistory: function (data) {
+            var history = new History(data);
 
-        // },
+            history.inject(this.els.history);
+        },
 
         /**
          *

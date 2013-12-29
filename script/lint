@@ -36,9 +36,11 @@ function print_text () {
 }
 
 IGNORE_LIBS_JS="\
-public\/js\/vendors\/jquery|\
-public\/js\/vendors\/jquery-ui|\
-public\/js\/vendors\/curl"
+public\/js\/vendor\/curl|\
+public\/js\/vendor\/jquery|\
+public\/js\/vendor\/jquery-inherit|\
+public\/js\/vendor\/jquery-ui"
+
 
 IGNORE_LIBS_PHP=""
 

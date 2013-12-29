@@ -21,7 +21,7 @@ $_routes += array(
         'title' => 'Nba',
         'assets' => array(
             'js' => array(
-                'App/start'
+                'view/nba/start'
             ),
             'css' => array(
                 'view/nba'

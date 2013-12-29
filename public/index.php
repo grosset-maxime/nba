@@ -46,6 +46,7 @@ function redirect ($url)
 }
 
 require_once ROOT_DIR . '/config/routes.php';
+require_once ROOT_DIR . '/config/assets.php';
 
 // Get global config
 // -----------------
@@ -56,18 +57,6 @@ if (file_exists($_configPath)) {
 } else {
     die("Global config file is missing.");
 }
-
-$appTitle = '';
-$appSubTitle = '';
-$copyRightText = '';
-
-if (!empty($_config['app'])) {
-    $appConfig = $_config['app'];
-    $appTitle = isset($appConfig['title']) ? $appConfig['title'] : '';
-    $appSubTitle = isset($appConfig['sub_title']) ? $appConfig['sub_title'] : '';
-    $copyRightText = isset($appConfig['copy_right_text']) ? $appConfig['copy_right_text'] : '';
-}
-
 
 $_r = !empty($_GET['r']) ? $_GET['r'] : 'nba';
 $_r = !empty($_POST['r']) ? $_POST['r'] : $_r;
@@ -84,11 +73,34 @@ if (!empty($_routes[$_r]['isScript'])) {
     exit;
 }
 
+
+// =========================================================== //
+// View Part
+// =========================================================== //
+
+// Manage assets (js and css)
+// --------------------------
+$assetsJs = '';
+
+if (!empty($_assets['js'])) {
+    foreach ($_assets['js'] as $key => $pathAsset) {
+        $assetsJs .= '<script type="text/javascript" src="/js/' . $pathAsset . '.js"></script>';
+    }
+}
+
 $assetsRouteJs = '';
 
 if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['js'])) {
     foreach ($_routes[$_r]['assets']['js'] as $key => $pathAsset) {
         $assetsRouteJs .= '<script type="text/javascript" src="/js/' . $pathAsset . '.js"></script>';
+    }
+}
+
+$assetsCss = '';
+
+if (!empty($_assets['css'])) {
+    foreach ($_assets['css'] as $key => $pathAsset) {
+        $assetsCss .= '<link rel="stylesheet" href="/css/' . $pathAsset . '.css" type="text/css" media="screen"/>';
     }
 }
 
@@ -104,33 +116,34 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8">
         <title>
 <?php if (!empty($_routes[$_r]['title'])) {
             echo $_routes[$_r]['title'];
 } ?>
         </title>
 
-        <link rel="icon favicon" type="image/png" href="favicon.png"/>
+        <!-- <link rel="icon favicon" type="image/png" href="favicon.png"/> -->
+
+        <!-- Metas //-->
+        <meta charset="utf-8">
 
         <!-- CSS //-->
-        <link rel="stylesheet" href="/js/vendors/jquery-ui/jquery-ui.css" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="/css/screen.css" media="screen" type="text/css" title="default"/>
+        <?php echo $assetsCss; ?>
 
         <?php echo $assetsRouteCss; ?>
 
-        <script type="text/javascript" src="/js/vendors/jquery/jquery-2.0.0.js"></script>
-
+        <!-- JS //-->
         <script type="text/javascript">
         var curl = {
             baseUrl: "/js",
             paths: {
-                'jquery': 'vendors/jquery/jquery-2.0.0',
-                'jquery-ui': 'vendors/jquery-ui/jquery-ui'
+                'jquery': 'vendor/jquery/jquery-2.0.0',
+                'jquery-ui': 'vendor/jquery-ui/jquery-ui'
             }
         };
         </script>
-        <script type="text/javascript" src="/js/vendors/curl/curl.js"></script>
+
+        <?php echo $assetsJs; ?>
 
         <?php echo $assetsRouteJs; ?>
     </head>
