@@ -5,7 +5,7 @@
 
 curl([
     'jquery',
-    'PM/Core/Core'
+    'PM/Core'
 ], function ($, PM) {
     'use strict';
 

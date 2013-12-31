@@ -5,21 +5,28 @@
 
 define([
     'jquery',
-    'App/Cmp/History',
-    'js!jquery-ui'
-], function ($, History) {
-    'use strict';
 
+    // PM
+    'PM/Core',
+    'PM/Utils/Client',
+
+    // App
+    'App/Cmp/History',
+
+    // Non AMD
+    'js!jquery-ui'
+], function ($, PM, Client, History) {
+    'use strict';
 
     var Nba = {
 
         /**
          *
          */
-        defaultOption: {
+        defaultOptions: {
             root: null,
             basePath: '',
-            initialRange: {
+            range: {
                 min: 0,
                 max: 0
             }
@@ -38,14 +45,6 @@ define([
         /**
          *
          */
-        range: {
-            min: 0,
-            max: 0
-        },
-
-        /**
-         *
-         */
         hasBasePathFocus: false,
 
         /**
@@ -53,8 +52,6 @@ define([
          */
         init: function (options) {
             $.extend(true, this.options, this.defaultOptions, options || {});
-
-            $.extend(true, this.range, this.options.initialRange);
 
             this.buildSkeleton();
 
@@ -249,7 +246,7 @@ define([
             $(document).on('keydown', function (e) {
                 var keyPressed = e.which,
                     doPreventDefault = false;
-                // console.log(keyPressed);
+                // PM.log(keyPressed);
                 switch (keyPressed) {
                 case 27: // ESC
                     that.els.basePath.val('');
@@ -289,37 +286,40 @@ define([
                 async: true,
                 data: {
                     basePath: that.basePath,
-                    range: that.range
+                    range: that.options.range
                 }
             });
 
             xhr.done(function (json) {
-                var error, randomPathCtnWidth, randomFolder;
+                var error, randomPathCtnWidth, randomFolder, osSeparator,
+                    message = '';
 
                 that.hideLoading();
 
                 if (json.error) {
                     error = json.error;
-                    // console.log('Error : ' + (error.message || 'no error message available'));
-                    // console.log(error);
+                    PM.log('Error : ' + (error.message || 'no error message available'));
+                    PM.log(error);
 
-                    // if (error.mandatoryFieldsMissing) {
-                    //     // info.html('Mandatory fields are missing.');
-                    // } else if (error.wrongBasePath) {
-                    //     message = 'Wrong base path.';
-                    //     // info.html(message);
-                    // } else {
-                    //     message = 'Unknown error.';
-                    //     // info.html(message);
-                    // }
-                    // return false;
+                    if (error.mandatoryFieldsMissing) {
+                        message = 'Mandatory fields are missing.';
+                    } else if (error.wrongBasePath) {
+                        message = 'Wrong base path.';
+                    } else {
+                        message = 'Unknown error.';
+                    }
+
+                    PM.log(message);
+                    return false;
                 }
 
                 if (json.success) {
                     els.randomNum.text(json.nba);
                     els.rangeMaxNum.text(json.rangeMaxNum);
 
-                    randomFolder = that.basePath + '/' + json.randomFolder;
+                    osSeparator = Client.OS.windows ? '\\' : '/';
+
+                    randomFolder = that.basePath + osSeparator + json.randomFolder;
 
                     randomPathCtnTemp.show();
                     randomPathCtn.hide();
@@ -336,11 +336,10 @@ define([
                 }
             });
 
-
-            // xhr.fail(function (jqXHR, textStatus) {
-            //     // console.log('error getRandomNum() : ' +
-            //     //     textStatus + ' / responseText : ' + jqXHR.responseText);
-            // });
+            xhr.fail(function (jqXHR, textStatus, errorThrown) {
+                var message = 'Nba.getRandomNum()';
+                PM.logAjaxFail(jqXHR, textStatus, errorThrown, message);
+            });
         },
 
         /**
