@@ -1,9 +1,9 @@
-/* line 6, ../sass/view/nba.scss */
+/* line 6, ../../sass/App/Nba/Nba.scss */
 .nba {
   min-width: 100%;
   min-height: 100%;
 }
-/* line 10, ../sass/view/nba.scss */
+/* line 10, ../../sass/App/Nba/Nba.scss */
 .nba .top {
   order: 1;
   flex: 1;
@@ -14,49 +14,49 @@
   padding: 0 10px;
   box-sizing: border-box;
 }
-/* line 20, ../sass/view/nba.scss */
+/* line 20, ../../sass/App/Nba/Nba.scss */
 .nba .top .base_path_ctn {
   order: 1;
   flex: 1;
   min-width: 0;
 }
-/* line 25, ../sass/view/nba.scss */
+/* line 25, ../../sass/App/Nba/Nba.scss */
 .nba .top .base_path_ctn .label {
   order: 1;
   flex: 0;
   min-width: 4.7em;
 }
-/* line 31, ../sass/view/nba.scss */
+/* line 31, ../../sass/App/Nba/Nba.scss */
 .nba .top .base_path_ctn .selector_ctn {
   order: 2;
   flex: 1;
 }
-/* line 35, ../sass/view/nba.scss */
+/* line 35, ../../sass/App/Nba/Nba.scss */
 .nba .top .base_path_ctn .selector_ctn .selector {
   width: 98%;
   height: 2em;
   padding-left: 4px;
 }
-/* line 42, ../sass/view/nba.scss */
+/* line 42, ../../sass/App/Nba/Nba.scss */
 .nba .top .base_path_ctn .generate_btn_ctn {
   order: 3;
   flex: 0;
   min-width: 10em;
 }
-/* line 49, ../sass/view/nba.scss */
+/* line 49, ../../sass/App/Nba/Nba.scss */
 .nba .top .opts_btn_ctn {
   order: 2;
   flex: 0;
   min-width: 32px;
 }
-/* line 55, ../sass/view/nba.scss */
+/* line 55, ../../sass/App/Nba/Nba.scss */
 .nba .top .opts_btn {
   width: 32px;
   height: 32px;
   background: white;
   cursor: pointer;
 }
-/* line 63, ../sass/view/nba.scss */
+/* line 63, ../../sass/App/Nba/Nba.scss */
 .nba .middle {
   order: 2;
   flex: 1;
@@ -64,16 +64,16 @@
   margin-top: -25px;
   font-family: Tahoma, Times, 'Times New Roman';
 }
-/* line 70, ../sass/view/nba.scss */
+/* line 70, ../../sass/App/Nba/Nba.scss */
 .nba .middle .random_num {
   font-size: 10.625em;
 }
-/* line 75, ../sass/view/nba.scss */
+/* line 75, ../../sass/App/Nba/Nba.scss */
 .nba .middle .separator,
 .nba .middle .range_max_num {
   font-size: 4em;
 }
-/* line 79, ../sass/view/nba.scss */
+/* line 79, ../../sass/App/Nba/Nba.scss */
 .nba .middle .random_path_ctn {
   margin-top: 10px;
   border: 1px solid #ddd;
@@ -84,14 +84,14 @@
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 86, ../sass/view/nba.scss */
+/* line 86, ../../sass/App/Nba/Nba.scss */
 .nba .middle .random_path_ctn .random_path_temp,
 .nba .middle .random_path_ctn .random_path {
   font-size: 0.6875em;
   color: #fefefe;
   font-family: Tahoma, Times, 'Times New Roman';
 }
-/* line 92, ../sass/view/nba.scss */
+/* line 92, ../../sass/App/Nba/Nba.scss */
 .nba .middle .random_path_ctn .random_path {
   display: none;
   color: #888;
@@ -101,13 +101,25 @@
   padding: 6px;
   background-color: transparent;
 }
-/* line 104, ../sass/view/nba.scss */
+/* line 104, ../../sass/App/Nba/Nba.scss */
 .nba .bottom {
   order: 3;
   flex: 1;
   min-width: 0;
 }
-/* line 112, ../sass/view/nba.scss */
+/* line 109, ../../sass/App/Nba/Nba.scss */
+.nba .bottom .history_ctn {
+  padding: 0 6px;
+}
+/* line 112, ../../sass/App/Nba/Nba.scss */
+.nba .bottom .history_ctn .label {
+  text-align: center;
+}
+/* line 117, ../../sass/App/Nba/Nba.scss */
+.nba .bottom .histories {
+  margin-top: 5px;
+}
+/* line 122, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading {
   display: none;
   position: fixed;
@@ -118,7 +130,7 @@
   width: 32px;
   height: 20px;
 }
-/* line 122, ../sass/view/nba.scss */
+/* line 132, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading {
   width: 4px;
   height: 4px;
@@ -140,21 +152,21 @@
   zoom: 1;
   *display: inline;
 }
-/* line 135, ../sass/view/nba.scss */
+/* line 145, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_1 {
   -moz-animation-delay: 0s;
   -webkit-animation-delay: 0s;
   -ms-animation-delay: 0s;
   animation-delay: 0s;
 }
-/* line 142, ../sass/view/nba.scss */
+/* line 152, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_2 {
   -moz-animation-delay: 0.39s;
   -webkit-animation-delay: 0.39s;
   -ms-animation-delay: 0.39s;
   animation-delay: 0.39s;
 }
-/* line 149, ../sass/view/nba.scss */
+/* line 159, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_3 {
   -moz-animation-delay: 0.78s;
   -webkit-animation-delay: 0.78s;
@@ -163,7 +175,7 @@
 }
 
 @-moz-keyframes loading_anim {
-  /* line 159, ../sass/view/nba.scss */
+  /* line 169, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -171,7 +183,7 @@
     -moz-transform: translateY(0);
   }
 
-  /* line 166, ../sass/view/nba.scss */
+  /* line 176, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -181,7 +193,7 @@
 }
 
 @-webkit-keyframes loading_anim {
-  /* line 175, ../sass/view/nba.scss */
+  /* line 185, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -189,7 +201,7 @@
     -webkit-transform: translateY(0);
   }
 
-  /* line 182, ../sass/view/nba.scss */
+  /* line 192, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -199,7 +211,7 @@
 }
 
 @-ms-keyframes loading_anim {
-  /* line 191, ../sass/view/nba.scss */
+  /* line 201, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -207,7 +219,7 @@
     -ms-transform: translateY(0);
   }
 
-  /* line 198, ../sass/view/nba.scss */
+  /* line 208, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -217,7 +229,7 @@
 }
 
 @keyframes loading_anim {
-  /* line 207, ../sass/view/nba.scss */
+  /* line 217, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -225,7 +237,7 @@
     transform: translateY(0);
   }
 
-  /* line 214, ../sass/view/nba.scss */
+  /* line 224, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;

@@ -24,7 +24,8 @@ $_routes += array(
                 'view/nba/start'
             ),
             'css' => array(
-                'view/nba'
+                'App/Nba/Nba',
+                'App/Cmp/History'
             ),
         ),
     ),

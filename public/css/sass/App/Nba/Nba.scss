@@ -98,16 +98,26 @@
                 padding: 6px;
                 background-color: transparent;
             }
-        }
+        } // End .random_path_ctn
     } // End .middle
 
     .bottom {
         order: 3;
         flex: 1;
         min-width: 0;
-    }
 
+        .history_ctn {
+            padding: 0 6px;
 
+            .label {
+                text-align: center;
+            }
+        }
+
+        .histories {
+            margin-top: 5px;
+        }
+    } // End .bottom
 
     .ctn_loading {
         display: none;

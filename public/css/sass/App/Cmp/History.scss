@@ -1,0 +1,26 @@
+// Compass mixins
+// --------------
+@import 'compass/css3';
+@import 'compass/css3/user-interface';
+
+.history_cmp {
+    float: left;
+    min-width: 40px;
+    margin-right: 6px;
+    margin-bottom: 3px;
+    padding: 5px;
+    border: 1px solid #eee;
+    background-color: #666;
+    color: #fff;
+    @include border-radius(4px);
+
+    .separator {
+        padding-left: 3px;
+        padding-right: 2px;
+        font-size: 0.8em;
+    }
+
+    .range_max {
+        font-size: 0.6em;
+    }
+} // End .history_cmp

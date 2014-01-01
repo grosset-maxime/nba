@@ -206,7 +206,7 @@ define([
             // Bottom
             // ------
             historyCtn = els.history = $('<div>', {
-                'class': 'history'
+                'class': 'histories'
             });
 
             $('<div>', {'class': 'history_ctn'}).append(
@@ -272,12 +272,13 @@ define([
             var xhr,
                 that = this,
                 els = that.els,
+                options = that.options,
                 randomPathCtn = els.randomPath,
                 randomPathCtnTemp = els.randomPathTemp;
 
             that.showLoading();
 
-            that.basePath = $.trim(els.basePath.val());
+            options.basePath = $.trim(els.basePath.val());
 
             xhr = $.ajax({
                 url: '/?r=getRandomNum_s',
@@ -285,8 +286,8 @@ define([
                 dataType: 'json',
                 async: true,
                 data: {
-                    basePath: that.basePath,
-                    range: that.options.range
+                    basePath: options.basePath,
+                    range: options.range
                 }
             });
 
@@ -319,7 +320,7 @@ define([
 
                     osSeparator = Client.OS.windows ? '\\' : '/';
 
-                    randomFolder = that.basePath + osSeparator + json.randomFolder;
+                    randomFolder = options.basePath + osSeparator + json.randomFolder;
 
                     randomPathCtnTemp.show();
                     randomPathCtn.hide();
@@ -332,7 +333,7 @@ define([
                     randomPathCtn.show();
                     randomPathCtn.select();
 
-                    // that.addHistory(json);
+                    that.addHistory(json);
                 }
             });
 
@@ -346,9 +347,14 @@ define([
          *
          */
         addHistory: function (data) {
-            var history = new History(data);
+            var history = new History({
+                nba: data.nba,
+                rangeMax: data.rangeMaxNum,
+                basePath: this.options.basePath,
+                randomFolder: data.randomFolder
+            });
 
-            history.inject(this.els.history);
+            history.inject(this.els.history, 'top');
         },
 
         /**
