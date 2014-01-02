@@ -63,7 +63,7 @@ define([
          */
         buildSkeleton: function () {
             var mainCtn, topCtn, middleCtn, bottomCtn, loadingCtn, basePathCtn,
-                basePath, optsBtn, randomNumCtn, rangeMaxNumCtn, randomPathCtn,
+                basePath, optsBtn, randomNum, rangeMaxNumCtn, randomPathCtn,
                 historyCtn, randomPathCtnTemp,
                 that = this,
                 els = {};
@@ -131,7 +131,7 @@ define([
 
             // Middle
             // ------
-            randomNumCtn = els.randomNum = $('<span>', {
+            randomNum = els.randomNum = $('<span>', {
                 'class': 'random_num',
                 text: '-'
             });
@@ -141,10 +141,10 @@ define([
                 text: '-'
             });
 
-            $('<div>', {
+            els.randomNumCtn = $('<div>', {
                 'class': 'random_num_ctn'
             }).append(
-                randomNumCtn,
+                randomNum,
                 $('<span>', {
                     'class': 'separator',
                     text: '/'
@@ -176,6 +176,7 @@ define([
             randomPathCtn = els.randomPath = $('<input/>', {
                 'class': 'random_path',
                 type: 'text',
+                readOnly: true,
                 on: {
                     focus: function () {
                         var that = this;
@@ -211,9 +212,16 @@ define([
 
             $('<div>', {'class': 'history_ctn'}).append(
                 $('<div>', {
-                    'class': 'label',
-                    text: 'History :'
-                }),
+                    'class': 'label'
+                }).append(
+                    $('<span>', {
+                        'class': 'label',
+                        text: 'History :'
+                    }),
+                    $('<span>', {
+                        'class': ''
+                    })
+                ),
                 historyCtn
             ).appendTo(bottomCtn);
 
@@ -272,9 +280,7 @@ define([
             var xhr,
                 that = this,
                 els = that.els,
-                options = that.options,
-                randomPathCtn = els.randomPath,
-                randomPathCtnTemp = els.randomPathTemp;
+                options = that.options;
 
             that.showLoading();
 
@@ -292,7 +298,7 @@ define([
             });
 
             xhr.done(function (json) {
-                var error, randomPathCtnWidth, randomFolder, osSeparator,
+                var error,
                     message = '';
 
                 that.hideLoading();
@@ -315,24 +321,9 @@ define([
                 }
 
                 if (json.success) {
-                    els.randomNum.text(json.nba);
-                    els.rangeMaxNum.text(json.rangeMaxNum);
-
-                    osSeparator = Client.OS.windows ? '\\' : '/';
-
-                    randomFolder = options.basePath + osSeparator + json.randomFolder;
-
-                    randomPathCtnTemp.show();
-                    randomPathCtn.hide();
-                    randomPathCtnTemp.text(randomFolder);
-                    randomPathCtnWidth = randomPathCtnTemp.width();
-                    randomPathCtnTemp.hide();
-
-                    randomPathCtn.css('width', randomPathCtnWidth + 2);
-                    randomPathCtn.val(randomFolder);
-                    randomPathCtn.show();
-                    randomPathCtn.select();
-
+                    that.setRandomView($.extend(true, json, {
+                        basePath: options.basePath
+                    }));
                     that.addHistory(json);
                 }
             });
@@ -346,12 +337,56 @@ define([
         /**
          *
          */
+        setRandomView: function (data) {
+            var osSeparator, randomFolder, randomPathCtnWidth,
+                els = this.els,
+                randomPathCtn = els.randomPath,
+                randomPathCtnTemp = els.randomPathTemp;
+
+            if (data.isHistory) {
+                els.randomNumCtn.addClass('is_history');
+            } else {
+                els.randomNumCtn.removeClass('is_history');
+            }
+
+            els.randomNum.text(data.nba);
+            els.rangeMaxNum.text(data.rangeMax);
+
+            osSeparator = Client.OS.windows ? '\\' : '/';
+
+            randomFolder = data.basePath + osSeparator + data.randomFolder;
+
+            randomPathCtnTemp.show();
+            randomPathCtn.hide();
+            randomPathCtnTemp.text(randomFolder);
+            randomPathCtnWidth = randomPathCtnTemp.width();
+            randomPathCtnTemp.hide();
+
+            randomPathCtn.css('width', randomPathCtnWidth + 2);
+            randomPathCtn.val(randomFolder);
+            randomPathCtn.show();
+            randomPathCtn.select();
+        },
+
+        /**
+         *
+         */
         addHistory: function (data) {
-            var history = new History({
+            var history,
+                that = this;
+
+            history = new History({
                 nba: data.nba,
-                rangeMax: data.rangeMaxNum,
+                rangeMax: data.rangeMax,
                 basePath: this.options.basePath,
-                randomFolder: data.randomFolder
+                randomFolder: data.randomFolder,
+                events: {
+                    click: function () {
+                        that.setRandomView($.extend(true, {}, this.options, {
+                            isHistory: true
+                        }));
+                    }
+                }
             });
 
             history.inject(this.els.history, 'top');

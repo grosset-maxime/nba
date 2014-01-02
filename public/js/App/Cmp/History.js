@@ -25,7 +25,10 @@ define('App/Cmp/History', [
             nba: 0,
             rangeMax: 0,
             basePath: '',
-            randomFolder: ''
+            randomFolder: '',
+            events: {
+                click: null
+            }
         },
 
         /**
@@ -46,7 +49,16 @@ define('App/Cmp/History', [
 
             ctn = els.container = $('<div>', {
                 'class': 'history_cmp ' + options.className,
-                title: options.randomFolder
+                title: options.randomFolder,
+                on: {
+                    click: function () {
+                        var click = options.events.click;
+
+                        if ($.isFunction(click)) {
+                            click.call(that);
+                        }
+                    }
+                }
             }).append(
                 $('<span>', {
                     'class': 'random_num',

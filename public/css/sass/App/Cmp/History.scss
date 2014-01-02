@@ -12,6 +12,7 @@
     border: 1px solid #eee;
     background-color: #666;
     color: #fff;
+    cursor: pointer;
     @include border-radius(4px);
 
     .separator {

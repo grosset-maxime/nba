@@ -93,7 +93,7 @@ $nba++;
 $jsonResult['success'] = true;
 $jsonResult['nba'] = $nba;
 $jsonResult['randomFolder'] = $randomFolder;
-$jsonResult['rangeMaxNum'] = $nbFolder;
+$jsonResult['rangeMax'] = $nbFolder;
 
 print json_encode($jsonResult);
 exit;

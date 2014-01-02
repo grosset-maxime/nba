@@ -8,19 +8,20 @@
   border: 1px solid #eee;
   background-color: #666;
   color: #fff;
+  cursor: pointer;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 17, ../../sass/App/Cmp/History.scss */
+/* line 18, ../../sass/App/Cmp/History.scss */
 .history_cmp .separator {
   padding-left: 3px;
   padding-right: 2px;
   font-size: 0.8em;
 }
-/* line 23, ../../sass/App/Cmp/History.scss */
+/* line 24, ../../sass/App/Cmp/History.scss */
 .history_cmp .range_max {
   font-size: 0.6em;
 }

@@ -63,9 +63,22 @@
     .middle {
         order: 2;
         flex: 1;
-        min-width: 0;
+        min-width: 100%;
+        min-height: 250px;
         margin-top: -25px;
         font-family: Tahoma, Times, 'Times New Roman';
+        cursor: pointer;
+
+        .random_num_ctn {
+            padding: 0 10px 10px 8px;
+        }
+
+        .random_num_ctn.is_history {
+            border: 1px solid #eee;
+            background-color: #666;
+            color: #fff;
+            @include border-radius(10px);
+        }
 
         .random_num {
             font-size: 10.625em;
@@ -104,7 +117,10 @@
     .bottom {
         order: 3;
         flex: 1;
+        justify-content: flex-start;
         min-width: 0;
+        border-top: 1px solid #eee;
+        padding-top: 5px;
 
         .history_ctn {
             padding: 0 6px;
