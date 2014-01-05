@@ -17,3 +17,11 @@ html, body {
 .flex_row {
     flex-flow: row nowrap;
 }
+
+
+/**
+ * jQuery-UI Button overrides
+ */
+.small .ui-button-text {
+    padding: 0.15em 0.3em;
+}

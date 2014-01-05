@@ -89,3 +89,11 @@ html, body {
 .flex_row {
   flex-flow: row nowrap;
 }
+
+/**
+ * jQuery-UI Button overrides
+ */
+/* line 25, sass/base/_base.scss */
+.small .ui-button-text {
+  padding: 0.15em 0.3em;
+}

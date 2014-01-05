@@ -65,7 +65,7 @@
         flex: 1;
         min-width: 100%;
         min-height: 250px;
-        margin-top: -25px;
+        margin-top: -18px;
         font-family: Tahoma, Times, 'Times New Roman';
         cursor: pointer;
 
@@ -127,6 +127,14 @@
 
             .label {
                 text-align: center;
+            }
+
+            .nb_random_num {
+                margin-left: 10px;
+            }
+
+            .clear_btn {
+                margin-left: 12px;
             }
         }
 

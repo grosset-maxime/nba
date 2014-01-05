@@ -40,12 +40,17 @@ define([
         /**
          *
          */
-        randomNum: 0,
+        nbRandomNum: 0,
 
         /**
          *
          */
         hasBasePathFocus: false,
+
+        /**
+         *
+         */
+        histories: [],
 
         /**
          *
@@ -90,9 +95,17 @@ define([
                         that.hasBasePathFocus = false;
                     },
                     keyup: function (e) {
-                        // Press ENTER
-                        if (e.which === 13) {
+                        var keyPressed = e.which;
+
+                        // PM.log(keyPressed);
+                        switch (keyPressed) {
+                        case 27: // ESC
+                            $(this).val('');
+                            break;
+                        case 13: // ENTER
+                            $(this).blur();
                             that.getRandomNum();
+                            break;
                         }
                     }
                 }
@@ -210,6 +223,18 @@ define([
                 'class': 'histories'
             });
 
+            els.nbRandomNum = $('<span>', {
+                'class': 'nb_random_num'
+            });
+
+            els.clearHistoryBtn = $('<span>', {
+                'class': 'clear_btn small',
+                text: 'Clear',
+                on: {
+                    click: that.clearHistory.bind(that)
+                }
+            }).button().hide();
+
             $('<div>', {'class': 'history_ctn'}).append(
                 $('<div>', {
                     'class': 'label'
@@ -218,9 +243,8 @@ define([
                         'class': 'label',
                         text: 'History :'
                     }),
-                    $('<span>', {
-                        'class': ''
-                    })
+                    els.nbRandomNum,
+                    els.clearHistoryBtn
                 ),
                 historyCtn
             ).appendTo(bottomCtn);
@@ -236,6 +260,9 @@ define([
             } else {
                 $(document.body).append(mainCtn);
             }
+
+            // Set focus on base path input
+            basePath.focus();
         },
 
         /**
@@ -254,11 +281,11 @@ define([
             $(document).on('keydown', function (e) {
                 var keyPressed = e.which,
                     doPreventDefault = false;
+
                 // PM.log(keyPressed);
                 switch (keyPressed) {
-                case 27: // ESC
-                    that.els.basePath.val('');
-                    break;
+                // case 27: // ESC
+                //     break;
                 case 13: // ENTER
                 case 32: // SPACE
                     if (!that.hasBasePathFocus) {
@@ -277,14 +304,21 @@ define([
          *
          */
         getRandomNum: function () {
-            var xhr,
+            var xhr, basePath,
                 that = this,
                 els = that.els,
+                basePathEl = els.basePath,
                 options = that.options;
 
-            that.showLoading();
+            basePath = $.trim(basePathEl.val());
 
-            options.basePath = $.trim(els.basePath.val());
+            if (!basePath) {
+                basePathEl.focus();
+                return;
+            }
+
+            that.showLoading();
+            options.basePath = basePath;
 
             xhr = $.ajax({
                 url: '/?r=getRandomNum_s',
@@ -292,7 +326,7 @@ define([
                 dataType: 'json',
                 async: true,
                 data: {
-                    basePath: options.basePath,
+                    basePath: basePath,
                     range: options.range
                 }
             });
@@ -322,7 +356,7 @@ define([
 
                 if (json.success) {
                     that.setRandomView($.extend(true, json, {
-                        basePath: options.basePath
+                        basePath: basePath
                     }));
                     that.addHistory(json);
                 }
@@ -373,7 +407,8 @@ define([
          */
         addHistory: function (data) {
             var history,
-                that = this;
+                that = this,
+                els = that.els;
 
             history = new History({
                 nba: data.nba,
@@ -389,7 +424,33 @@ define([
                 }
             });
 
-            history.inject(this.els.history, 'top');
+            history.inject(els.history, 'top');
+
+            that.histories.push(history);
+
+            that.nbRandomNum++;
+            els.nbRandomNum.text('(' + that.nbRandomNum + ')');
+
+            els.clearHistoryBtn.show();
+
+            $(document.body).scrollTop(0);
+        },
+
+        /**
+         *
+         */
+        clearHistory: function () {
+            var i, nbH,
+                els = this.els;
+
+            for(i = 0, nbH = this.histories.length; i < nbH; i++) {
+                this.histories[i].destroy();
+            }
+
+            this.nbRandomNum = 0;
+            els.nbRandomNum.text('');
+
+            els.clearHistoryBtn.hide();
         },
 
         /**
