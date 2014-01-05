@@ -352,7 +352,7 @@ define([
             els.randomNum.text(data.nba);
             els.rangeMaxNum.text(data.rangeMax);
 
-            osSeparator = Client.OS.windows ? '\\' : '/';
+            osSeparator = Client.OS.win ? '\\' : '/';
 
             randomFolder = data.basePath + osSeparator + data.randomFolder;
 
