@@ -79,21 +79,20 @@ if ($nbFolder && !$range['max']) {
 }
 
 if (!$range['min']) {
-    $range['min'] = 0;
+    $range['min'] = 1;
 }
 
 $nba = mt_rand($range['min'], $range['max']);
 
 if ($nbFolder) {
-    $randomFolder = $folders[$nba];
+    $randomFolder = $folders[$nba - 1];
 }
-
-$nba++;
 
 $jsonResult['success'] = true;
 $jsonResult['nba'] = $nba;
 $jsonResult['randomFolder'] = $randomFolder;
 $jsonResult['rangeMax'] = $nbFolder;
+// $jsonResult['folders'] = $folders;
 
 print json_encode($jsonResult);
 exit;

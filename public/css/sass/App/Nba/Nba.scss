@@ -3,6 +3,12 @@
 @import 'compass/css3';
 @import 'compass/css3/user-interface';
 
+@mixin inputText {
+    border: 1px solid #ddd;
+    background-color: #fefefe;
+    border-radius: 3px;
+}
+
 .nba {
     min-width: 100%;
     min-height: 100%;
@@ -28,15 +34,16 @@
                 min-width: 4.7em;
             }
 
-            .selector_ctn {
+            .base_path_input_ctn {
                 order: 2;
                 flex: 1;
+            }
 
-                .selector {
-                    width: 98%;
-                    height: 2em;
-                    padding-left: 4px;
-                }
+            .base_path_input {
+                width: 98%;
+                height: 2em;
+                padding-left: 4px;
+                @include inputText();
             }
 
             .generate_btn_ctn {
@@ -77,7 +84,7 @@
             border: 1px solid #eee;
             background-color: #666;
             color: #fff;
-            @include border-radius(10px);
+            border-radius: 10px;
         }
 
         .random_num {
@@ -91,9 +98,7 @@
 
         .random_path_ctn {
             margin-top: 10px;
-            border: 1px solid #ddd;
-            background-color: #fefefe;
-            @include border-radius(3px);
+            @include inputText();
 
             .random_path_temp,
             .random_path {
@@ -163,7 +168,7 @@
             -webkit-animation: loading_anim 1.3s infinite alternate;
             -ms-animation: loading_anim 1.3s infinite alternate;
             animation: loading_anim 1.3s infinite alternate;
-            @include border-radius(20px);
+            border-radius: 20px;
             @include inline-block();
         }
 

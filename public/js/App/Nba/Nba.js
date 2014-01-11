@@ -63,7 +63,7 @@ define([
 
             this.buildSkeleton();
 
-            this.attachEvents();
+            this.attachKeyboardShorcuts();
         },
 
         /**
@@ -87,7 +87,7 @@ define([
             // Top
             // ---
             basePath = els.basePath = $('<input/>', {
-                'class': 'selector',
+                'class': 'base_path_input',
                 type: 'text',
                 placeholder: 'Enter your base path here...',
                 on: {
@@ -122,7 +122,7 @@ define([
                     text: 'Base path :'
                 }),
                 $('<span>', {
-                    'class': 'selector_ctn'
+                    'class': 'base_path_input_ctn'
                 }).append(basePath),
                 $('<span>', {
                     'class': 'generate_btn_ctn',
@@ -280,13 +280,6 @@ define([
         /**
          *
          */
-        attachEvents: function () {
-            this.attachKeyboardShorcuts();
-        },
-
-        /**
-         *
-         */
         attachKeyboardShorcuts: function () {
             var that = this;
 
@@ -347,7 +340,7 @@ define([
                 var error,
                     message = '';
 
-                that.hideLoading();
+                // that.hideLoading();
 
                 if (json.error) {
                     error = json.error;
@@ -371,6 +364,8 @@ define([
                         basePath: basePath
                     }));
                     that.addHistory(json);
+
+                    // PM.log(json.folders);
                 }
             });
 
