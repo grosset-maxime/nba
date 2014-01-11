@@ -18,10 +18,13 @@ define([
 ], function ($, PM, Client, History) {
     'use strict';
 
-    var Nba = {
+    var Nba,
+        currentHistoryView = History.VIEW_NUM;
+
+    Nba = {
 
         /**
-         *
+         * @property {Object} defaultOptions - Default options values.
          */
         defaultOptions: {
             root: null,
@@ -167,7 +170,7 @@ define([
 
             // Loading
             // -------
-            loadingCtn = that.loadingCtn = $('<div>', {
+            loadingCtn = els.loadingCtn = $('<div>', {
                 'class': 'ctn_loading'
             }).append(
                 $('<span>', {
@@ -235,6 +238,14 @@ define([
                 }
             }).button().hide();
 
+            els.showRandomFolderBtn = $('<span>', {
+                'class': 'folder_name_btn small',
+                text: 'Toggle view',
+                on: {
+                    click: that.toggleHistoryView.bind(that)
+                }
+            }).button().hide();
+
             $('<div>', {'class': 'history_ctn'}).append(
                 $('<div>', {
                     'class': 'label'
@@ -244,6 +255,7 @@ define([
                         text: 'History :'
                     }),
                     els.nbRandomNum,
+                    els.showRandomFolderBtn,
                     els.clearHistoryBtn
                 ),
                 historyCtn
@@ -415,6 +427,7 @@ define([
                 rangeMax: data.rangeMax,
                 basePath: this.options.basePath,
                 randomFolder: data.randomFolder,
+                view: currentHistoryView,
                 events: {
                     click: function () {
                         that.setRandomView($.extend(true, {}, this.options, {
@@ -431,6 +444,7 @@ define([
             that.nbRandomNum++;
             els.nbRandomNum.text('(' + that.nbRandomNum + ')');
 
+            els.showRandomFolderBtn.show();
             els.clearHistoryBtn.show();
 
             $(document.body).scrollTop(0);
@@ -450,21 +464,39 @@ define([
             this.nbRandomNum = 0;
             els.nbRandomNum.text('');
 
+            els.showRandomFolderBtn.hide();
             els.clearHistoryBtn.hide();
         },
 
         /**
          *
          */
+        toggleHistoryView: function () {
+            var i, nbH;
+
+            if (currentHistoryView === History.VIEW_NUM) {
+                currentHistoryView = History.VIEW_FOLDER;
+            } else {
+                currentHistoryView = History.VIEW_NUM;
+            }
+
+            for(i = 0, nbH = this.histories.length; i < nbH; i++) {
+                this.histories[i].showView(currentHistoryView);
+            }
+        },
+
+        /**
+         *
+         */
         showLoading: function () {
-            this.loadingCtn.stop().fadeIn('fast');
+            this.els.loadingCtn.stop().fadeIn('fast');
         },
 
         /**
          *
          */
         hideLoading: function () {
-            this.loadingCtn.stop().fadeOut('fast');
+            this.els.loadingCtn.stop().fadeOut('fast');
         }
     };
 

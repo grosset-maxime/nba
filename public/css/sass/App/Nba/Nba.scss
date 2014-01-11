@@ -133,10 +133,11 @@
                 margin-left: 10px;
             }
 
-            .clear_btn {
+            .clear_btn,
+            .folder_name_btn {
                 margin-left: 12px;
             }
-        }
+        } // End .history_ctn
 
         .histories {
             margin-top: 5px;
@@ -187,7 +188,7 @@
             animation-delay: 0.78s;
         }
     } // End .ctn_loading
-} // End .diapo_shuffle
+} // End .nba
 
 @-moz-keyframes loading_anim {
     0% {
