@@ -342,8 +342,6 @@ define([
                 var error,
                     message = '';
 
-                that.hideLoading();
-
                 if (json.error) {
                     error = json.error;
                     PM.log('Error : ' + (error.message || 'no error message available'));
@@ -374,6 +372,10 @@ define([
             xhr.fail(function (jqXHR, textStatus, errorThrown) {
                 var message = 'Nba.getRandomNum()';
                 PM.logAjaxFail(jqXHR, textStatus, errorThrown, message);
+            });
+
+            xhr.complete(function () {
+                that.hideLoading();
             });
         },
 
