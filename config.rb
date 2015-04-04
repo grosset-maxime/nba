@@ -1,17 +1,19 @@
 # Require any additional compass plugins here.
+require 'sass-css-importer' # sudo gem install --pre sass-css-importer
 
 # Set this to the root of your project when deployed:
 http_path = "./"
-css_dir = "./css"
-sass_dir = "./css/sass"
-images_dir = "./img"
-javascripts_dir = "./js"
+css_dir = "./public/css"
+sass_dir = "./sass"
+images_dir = "./public/img"
+javascripts_dir = "./public/js"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
 
 # To compress css : compass compile -e production --force
 output_style = (environment == :production) ? :compressed : :expanded
+# output_style = :compressed
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true

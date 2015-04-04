@@ -39,3 +39,17 @@
 @import 'base/base';
 @import 'base/content';
 
+// App Animations
+// --------------
+@import 'App/Animations/MainViewAnim';
+
+// App Views
+// ---------
+.nba {
+    color: #333;
+    min-width: 100%;
+    min-height: 100%;
+
+    @import 'App/Views/MainView';
+    @import 'App/Cmp/History';
+}

@@ -14,8 +14,7 @@ define([
     'Appx/Cmp/History',
 
     // Non AMD
-    'js!jquery-ui',
-    'css!css/App/Nba/Nba'
+    'js!jquery-ui'
 ], function ($, PM, Client, History) {
     'use strict';
 
