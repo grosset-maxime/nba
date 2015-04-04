@@ -72,7 +72,7 @@ define([
         buildSkeleton: function () {
             var mainCtn, topCtn, middleCtn, bottomCtn, loadingCtn, basePathCtn,
                 basePath, optsBtn, randomNum, rangeMaxNumCtn, randomPathCtn,
-                historyCtn, randomPathCtnTemp,
+                historyCtn, randomPathCtnTemp, repPath, repPathCtn,
                 that = this,
                 els = {};
 
@@ -80,7 +80,7 @@ define([
 
             mainCtn = $('<div>', {'class': 'nba flex_col'});
 
-            topCtn = $('<div>', {'class': 'top flex_row'});
+            topCtn =  $('<div>', {'class': 'top'});
             middleCtn = $('<div>', {'class': 'middle flex_col'});
             bottomCtn = $('<div>', {'class': 'bottom flex_col'});
 
@@ -90,6 +90,34 @@ define([
                 'class': 'base_path_input',
                 type: 'text',
                 placeholder: 'Enter your base path here...',
+                on: {
+                    focus: function () {
+                        that.hasBasePathFocus = true;
+                    },
+                    blur: function () {
+                        that.hasBasePathFocus = false;
+                    },
+                    keyup: function (e) {
+                        var keyPressed = e.which;
+
+                        // PM.log(keyPressed);
+                        switch (keyPressed) {
+                        case 27: // ESC
+                            $(this).val('');
+                            break;
+                        case 13: // ENTER
+                            $(this).blur();
+                            that.getRandomNum();
+                            break;
+                        }
+                    }
+                }
+            });
+
+            repPath = els.repPath = $('<input/>', {
+                'class': 'rep_path_input',
+                type: 'text',
+                placeholder: 'Replacement path',
                 on: {
                     focus: function () {
                         that.hasBasePathFocus = true;
@@ -153,6 +181,19 @@ define([
                     }).button()
                 })
             ).appendTo(topCtn);
+
+            repPathCtn = $('<div>', {
+                'class': 'rep_path_ctn flex_row'
+            }).append(
+                $('<span>', {
+                    'class': 'label',
+                    text: 'Replacement path :'
+                }),
+                $('<span>', {
+                    'class': 'rep_path_input_ctn'
+                }).append(repPath)
+            ).appendTo(topCtn);
+
 
             optsBtn = $('<div>', {
                 'class': 'opts_btn'

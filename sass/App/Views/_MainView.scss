@@ -48,6 +48,31 @@
         }
     } // End .base_path_ctn
 
+    .rep_path_ctn {
+        order: 2;
+        flex: 1;
+        min-width: 0;
+        margin-top: 8px;
+
+        .label {
+            order: 1;
+            flex: 0;
+            min-width: 8em;
+        }
+
+        .rep_path_input_ctn {
+            order: 2;
+            flex: 1;
+        }
+
+        .rep_path_input {
+            width: 100%;
+            height: 2em;
+            padding-left: 4px;
+            @include inputText();
+        }
+    } // End .rep_path_ctn
+
     .opts_btn_ctn {
         order: 2;
         flex: 0;

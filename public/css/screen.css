@@ -255,19 +255,46 @@ html, body {
   padding-left: 8px;
 }
 /* line 51, ../../sass/App/Views/_MainView.scss */
+.nba .top .rep_path_ctn {
+  order: 2;
+  flex: 1;
+  min-width: 0;
+  margin-top: 8px;
+}
+/* line 57, ../../sass/App/Views/_MainView.scss */
+.nba .top .rep_path_ctn .label {
+  order: 1;
+  flex: 0;
+  min-width: 8em;
+}
+/* line 63, ../../sass/App/Views/_MainView.scss */
+.nba .top .rep_path_ctn .rep_path_input_ctn {
+  order: 2;
+  flex: 1;
+}
+/* line 68, ../../sass/App/Views/_MainView.scss */
+.nba .top .rep_path_ctn .rep_path_input {
+  width: 100%;
+  height: 2em;
+  padding-left: 4px;
+  border: 1px solid #ddd;
+  background-color: #fefefe;
+  border-radius: 3px;
+}
+/* line 76, ../../sass/App/Views/_MainView.scss */
 .nba .top .opts_btn_ctn {
   order: 2;
   flex: 0;
   min-width: 32px;
 }
-/* line 57, ../../sass/App/Views/_MainView.scss */
+/* line 82, ../../sass/App/Views/_MainView.scss */
 .nba .top .opts_btn {
   width: 32px;
   height: 32px;
   background: white;
   cursor: pointer;
 }
-/* line 65, ../../sass/App/Views/_MainView.scss */
+/* line 90, ../../sass/App/Views/_MainView.scss */
 .nba .middle {
   order: 2;
   flex: 1;
@@ -277,41 +304,41 @@ html, body {
   font-family: Tahoma, Times, 'Times New Roman';
   cursor: pointer;
 }
-/* line 74, ../../sass/App/Views/_MainView.scss */
+/* line 99, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_num_ctn {
   padding: 0 10px 10px 8px;
 }
-/* line 78, ../../sass/App/Views/_MainView.scss */
+/* line 103, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_num_ctn.is_history {
   border: 1px solid #eee;
   background-color: #666;
   color: #fff;
   border-radius: 10px;
 }
-/* line 85, ../../sass/App/Views/_MainView.scss */
+/* line 110, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_num {
   font-size: 10.625em;
 }
-/* line 90, ../../sass/App/Views/_MainView.scss */
+/* line 115, ../../sass/App/Views/_MainView.scss */
 .nba .middle .separator,
 .nba .middle .range_max_num {
   font-size: 4em;
 }
-/* line 94, ../../sass/App/Views/_MainView.scss */
+/* line 119, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_path_ctn {
   margin-top: 10px;
   border: 1px solid #ddd;
   background-color: #fefefe;
   border-radius: 3px;
 }
-/* line 99, ../../sass/App/Views/_MainView.scss */
+/* line 124, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_path_ctn .random_path_temp,
 .nba .middle .random_path_ctn .random_path {
   font-size: 0.6875em;
   color: #fefefe;
   font-family: Tahoma, Times, 'Times New Roman';
 }
-/* line 105, ../../sass/App/Views/_MainView.scss */
+/* line 130, ../../sass/App/Views/_MainView.scss */
 .nba .middle .random_path_ctn .random_path {
   display: none;
   color: #888;
@@ -321,7 +348,7 @@ html, body {
   padding: 6px;
   background-color: transparent;
 }
-/* line 117, ../../sass/App/Views/_MainView.scss */
+/* line 142, ../../sass/App/Views/_MainView.scss */
 .nba .bottom {
   order: 3;
   flex: 1;
@@ -330,28 +357,28 @@ html, body {
   border-top: 1px solid #eee;
   padding-top: 5px;
 }
-/* line 125, ../../sass/App/Views/_MainView.scss */
+/* line 150, ../../sass/App/Views/_MainView.scss */
 .nba .bottom .history_ctn {
   padding: 0 6px;
 }
-/* line 128, ../../sass/App/Views/_MainView.scss */
+/* line 153, ../../sass/App/Views/_MainView.scss */
 .nba .bottom .history_ctn .label {
   text-align: center;
 }
-/* line 132, ../../sass/App/Views/_MainView.scss */
+/* line 157, ../../sass/App/Views/_MainView.scss */
 .nba .bottom .history_ctn .nb_random_num {
   margin-left: 10px;
 }
-/* line 137, ../../sass/App/Views/_MainView.scss */
+/* line 162, ../../sass/App/Views/_MainView.scss */
 .nba .bottom .history_ctn .clear_btn,
 .nba .bottom .history_ctn .folder_name_btn {
   margin-left: 12px;
 }
-/* line 142, ../../sass/App/Views/_MainView.scss */
+/* line 167, ../../sass/App/Views/_MainView.scss */
 .nba .bottom .histories {
   margin-top: 5px;
 }
-/* line 147, ../../sass/App/Views/_MainView.scss */
+/* line 172, ../../sass/App/Views/_MainView.scss */
 .nba .ctn_loading {
   display: none;
   float: right;
