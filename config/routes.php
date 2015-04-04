@@ -32,9 +32,9 @@ $_routes += array(
 // API - Scripts
 // -------------
 $_routes += array(
-    'getRandomNum_s' => array(
+    'getRandomFolder_s' => array(
         'isScript' => true,
-        'path' => '/api/script/getRandomNum.php'
+        'path' => '/api/script/getRandomFolder.php'
     ),
 );
 

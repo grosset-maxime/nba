@@ -42,13 +42,12 @@ function getFolderList($path)
 }
 
 $basePath = !empty($_POST['basePath']) ? trim($_POST['basePath']) : '';
-$range = !empty($_POST['range']) ? $_POST['range'] : array();
 
 $logError = array(
     'mandatory_fields' => array(
+        'basePath' => '= ' . $basePath
     ),
     'optional_fields' => array(
-        'basePath' => '= ' . $basePath
     ),
 );
 
@@ -61,7 +60,7 @@ $nbFolder = 0;
 $nba = 0;
 $randomFolder = '';
 
-if ($basePath && !file_exists($basePath) && !$range['min'] && !$range['max']) {
+if ($basePath && !file_exists($basePath)) {
     $jsonResult['error'] = $logError;
     $jsonResult['error']['wrongBasePath'] = true;
     $jsonResult['error']['message'] = 'Wrong base path, it doesn\'t exist.';
@@ -74,7 +73,7 @@ if ($basePath) {
 }
 
 $nbFolder = count($folders);
-if ($nbFolder && !$range['max']) {
+if ($nbFolder) {
     $range['max'] = $nbFolder;
 }
 

@@ -12,10 +12,19 @@ define([
 
     // App
     'Appx/Cmp/History',
+    'Appx/Actions/GetRandomAction',
 
     // Non AMD
     'js!jquery-ui'
-], function ($, PM, Client, History) {
+], function (
+    $,
+
+    PM,
+    Client,
+
+    History,
+    GetRandomAction
+) {
     'use strict';
 
     var Nba,
@@ -28,17 +37,18 @@ define([
          */
         defaultOptions: {
             root: null,
-            basePath: '',
-            range: {
-                min: 0,
-                max: 0
-            }
+            basePath: ''
         },
 
         /**
          *
          */
         options: {},
+
+        /**
+         *
+         */
+        basePath: '',
 
         /**
          *
@@ -59,11 +69,19 @@ define([
          *
          */
         init: function (options) {
-            $.extend(true, this.options, this.defaultOptions, options || {});
+            var that = this;
 
-            this.buildSkeleton();
+            $.extend(true, that.options, that.defaultOptions, options || {});
 
-            this.attachKeyboardShorcuts();
+            that.basePath = that.options.basePath;
+
+            that.buildSkeleton();
+
+            that.attachKeyboardShorcuts();
+
+            if (that.basePath) {
+                that.getRandomFolder();
+            }
         },
 
         /**
@@ -90,6 +108,7 @@ define([
                 'class': 'base_path_input',
                 type: 'text',
                 placeholder: 'Enter your base path here...',
+                value: that.basePath,
                 on: {
                     focus: function () {
                         that.hasBasePathFocus = true;
@@ -107,7 +126,7 @@ define([
                             break;
                         case 13: // ENTER
                             $(this).blur();
-                            that.getRandomNum();
+                            that.getRandomFolder();
                             break;
                         }
                     }
@@ -135,7 +154,7 @@ define([
                             break;
                         case 13: // ENTER
                             $(this).blur();
-                            that.getRandomNum();
+                            that.getRandomFolder();
                             break;
                         }
                     }
@@ -176,7 +195,7 @@ define([
                         'class': 'generate_btn',
                         text: 'Generate',
                         on: {
-                            click: that.getRandomNum.bind(that)
+                            click: that.getRandomFolder.bind(that)
                         }
                     }).button()
                 })
@@ -310,11 +329,7 @@ define([
                 bottomCtn
             );
 
-            if (that.options.root) {
-                that.options.root.append(mainCtn);
-            } else {
-                $(document.body).append(mainCtn);
-            }
+            mainCtn.appendTo(that.options.root || document.body);
 
             // Set focus on base path input
             basePath.focus();
@@ -337,7 +352,7 @@ define([
                 case 13: // ENTER
                 case 32: // SPACE
                     if (!that.hasBasePathFocus) {
-                        that.getRandomNum();
+                        that.getRandomFolder();
                     }
                     break;
                 }
@@ -348,76 +363,71 @@ define([
             });
         },
 
+        getBasePathInput: function () {
+            return $.trim(this.els.basePath.val());
+        },
+
         /**
          *
          */
-        getRandomNum: function () {
-            var xhr, basePath,
-                that = this,
-                els = that.els,
-                basePathEl = els.basePath,
-                options = that.options;
+        getRandomFolder: function () {
+            var basePath,
+                that = this;
 
-            basePath = $.trim(basePathEl.val());
+            basePath = that.basePath = that.getBasePathInput();
 
             if (!basePath) {
-                basePathEl.focus();
+                that.els.basePath.focus();
                 return;
             }
 
             that.showLoading();
-            options.basePath = basePath;
 
-            xhr = $.ajax({
-                url: '/?r=getRandomNum_s',
-                type: 'POST',
-                dataType: 'json',
-                async: true,
-                data: {
-                    basePath: basePath,
-                    range: options.range
+            GetRandomAction.getRandomFolder({
+                basePath: basePath,
+                success: that.onGetRandomFolder.bind(that),
+                failure: function () {
+
+                },
+                complete: function () {
+                    that.hideLoading();
                 }
             });
+        },
 
-            xhr.done(function (json) {
-                var error,
-                    message = '';
+        onGetRandomFolder: function (json) {
+            var error,
+                that = this,
+                message = '';
 
-                if (json.error) {
-                    error = json.error;
-                    PM.log('Error : ' + (error.message || 'no error message available'));
-                    PM.log(error);
+            if (json.error) {
+                error = json.error;
+                PM.log('Error : ' + (error.message || 'no error message available'));
+                PM.log(error);
 
-                    if (error.mandatoryFieldsMissing) {
-                        message = 'Mandatory fields are missing.';
-                    } else if (error.wrongBasePath) {
-                        message = 'Wrong base path.';
-                    } else {
-                        message = 'Unknown error.';
-                    }
-
-                    PM.log(message);
-                    return false;
+                if (error.mandatoryFieldsMissing) {
+                    message = 'Mandatory fields are missing.';
+                } else if (error.wrongBasePath) {
+                    message = 'Wrong base path.';
+                } else {
+                    message = 'Unknown error.';
                 }
 
-                if (json.success) {
-                    that.setRandomView($.extend(true, json, {
-                        basePath: basePath
-                    }));
-                    that.addHistory(json);
+                PM.log(message);
+                return false;
+            }
 
-                    // PM.log(json.folders);
-                }
-            });
+            if (json.success) {
 
-            xhr.fail(function (jqXHR, textStatus, errorThrown) {
-                var message = 'Nba.getRandomNum()';
-                PM.logAjaxFail(jqXHR, textStatus, errorThrown, message);
-            });
+                that.nbRandomNum++;
 
-            xhr.complete(function () {
-                that.hideLoading();
-            });
+                json.basePath = that.basePath;
+
+                that.setRandomView(json);
+                that.addHistory(json);
+
+                // PM.log(json.folders);
+            }
         },
 
         /**
@@ -457,16 +467,18 @@ define([
         /**
          *
          */
-        addHistory: function (data) {
+        addHistory: function (options) {
             var history,
                 that = this,
                 els = that.els;
 
+            options = options || {};
+
             history = new History({
-                nba: data.nba,
-                rangeMax: data.rangeMax,
-                basePath: this.options.basePath,
-                randomFolder: data.randomFolder,
+                nba: options.nba,
+                rangeMax: options.rangeMax,
+                basePath: options.basePath,
+                randomFolder: options.randomFolder,
                 view: currentHistoryView,
                 events: {
                     click: function () {
@@ -481,7 +493,6 @@ define([
 
             that.histories.push(history);
 
-            that.nbRandomNum++;
             els.nbRandomNum.text('(' + that.nbRandomNum + ')');
 
             els.showRandomFolderBtn.show();

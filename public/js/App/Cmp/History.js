@@ -55,6 +55,8 @@ define('Appx/Cmp/History', [
          * @param {Function} [options.events.click] - Fired on click on the Cmp.
          */
         __constructor: function (options) {
+            $.extend(true, this.options, this.defaultOptions, options || {});
+
             this.__base(options);
         },
 
