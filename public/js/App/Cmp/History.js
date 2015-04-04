@@ -3,7 +3,7 @@
     define
 */
 
-define('App/Cmp/History', [
+define('Appx/Cmp/History', [
     'jquery',
 
     // PM

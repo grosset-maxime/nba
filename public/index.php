@@ -135,12 +135,14 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
         <!-- JS //-->
         <script type="text/javascript">
         var curl = {
-            baseUrl: "/js",
             paths: {
-                'jquery': 'vendor/jquery/jquery-2.0.0',
-                'jquery-ui': 'vendor/jquery-ui/jquery-ui',
-                'jquery-inherit': 'vendor/jquery-inherit/jquery-inherit',
-                'PM': 'vendor/PM'
+                'curl': 'js/vendor/curl',
+                'jsx': 'js',
+                'Appx': 'js/App',
+                'jquery': 'js/vendor/jquery/jquery-2.0.0',
+                'jquery-ui': 'js/vendor/jquery-ui/jquery-ui',
+                'jquery-inherit': 'js/vendor/jquery-inherit/jquery-inherit',
+                'PM': 'js/vendor/PM'
             }
         };
         </script>

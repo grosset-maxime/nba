@@ -1,6 +1,7 @@
 .*
 *.sublime-project
 *.sublime-workspace
+public/js/vendor/PM/
 
 !.gitignore
 !.jshintrc

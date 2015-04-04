@@ -11,10 +11,11 @@ define([
     'PM/Utils/Client',
 
     // App
-    'App/Cmp/History',
+    'Appx/Cmp/History',
 
     // Non AMD
-    'js!jquery-ui'
+    'js!jquery-ui',
+    'css!css/App/Nba/Nba'
 ], function ($, PM, Client, History) {
     'use strict';
 
@@ -114,6 +115,21 @@ define([
                 }
             });
 
+            // Loading
+            loadingCtn = els.loadingCtn = $('<div>', {
+                'class': 'ctn_loading'
+            }).append(
+                $('<span>', {
+                    'class': 'el_loading_1 el_loading'
+                }),
+                $('<span>', {
+                    'class': 'el_loading_2 el_loading'
+                }),
+                $('<span>', {
+                    'class': 'el_loading_3 el_loading'
+                })
+            );
+
             basePathCtn = $('<div>', {
                 'class': 'base_path_ctn flex_row'
             }).append(
@@ -123,7 +139,10 @@ define([
                 }),
                 $('<span>', {
                     'class': 'base_path_input_ctn'
-                }).append(basePath),
+                }).append(
+                    basePath,
+                    loadingCtn
+                ),
                 $('<span>', {
                     'class': 'generate_btn_ctn',
                     html: $('<div>', {
@@ -166,22 +185,6 @@ define([
                     text: '/'
                 }),
                 rangeMaxNumCtn
-            ).appendTo(middleCtn);
-
-            // Loading
-            // -------
-            loadingCtn = els.loadingCtn = $('<div>', {
-                'class': 'ctn_loading'
-            }).append(
-                $('<span>', {
-                    'class': 'el_loading_1 el_loading'
-                }),
-                $('<span>', {
-                    'class': 'el_loading_2 el_loading'
-                }),
-                $('<span>', {
-                    'class': 'el_loading_3 el_loading'
-                })
             ).appendTo(middleCtn);
 
             // Use to calculate text width
@@ -340,7 +343,7 @@ define([
                 var error,
                     message = '';
 
-                // that.hideLoading();
+                that.hideLoading();
 
                 if (json.error) {
                     error = json.error;

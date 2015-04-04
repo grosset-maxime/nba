@@ -146,15 +146,14 @@
 /* line 152, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading {
   display: none;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 550;
   text-align: center;
   width: 32px;
   height: 20px;
+  float: right;
+  margin-top: -22px;
+  margin-right: 3%;
 }
-/* line 162, ../../sass/App/Nba/Nba.scss */
+/* line 161, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading {
   width: 4px;
   height: 4px;
@@ -172,21 +171,21 @@
   zoom: 1;
   *display: inline;
 }
-/* line 175, ../../sass/App/Nba/Nba.scss */
+/* line 174, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_1 {
   -moz-animation-delay: 0s;
   -webkit-animation-delay: 0s;
   -ms-animation-delay: 0s;
   animation-delay: 0s;
 }
-/* line 182, ../../sass/App/Nba/Nba.scss */
+/* line 181, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_2 {
   -moz-animation-delay: 0.39s;
   -webkit-animation-delay: 0.39s;
   -ms-animation-delay: 0.39s;
   animation-delay: 0.39s;
 }
-/* line 189, ../../sass/App/Nba/Nba.scss */
+/* line 188, ../../sass/App/Nba/Nba.scss */
 .nba .ctn_loading .el_loading_3 {
   -moz-animation-delay: 0.78s;
   -webkit-animation-delay: 0.78s;
@@ -195,7 +194,7 @@
 }
 
 @-moz-keyframes loading_anim {
-  /* line 199, ../../sass/App/Nba/Nba.scss */
+  /* line 198, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -203,7 +202,7 @@
     -moz-transform: translateY(0);
   }
 
-  /* line 206, ../../sass/App/Nba/Nba.scss */
+  /* line 205, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -213,7 +212,7 @@
 }
 
 @-webkit-keyframes loading_anim {
-  /* line 215, ../../sass/App/Nba/Nba.scss */
+  /* line 214, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -221,7 +220,7 @@
     -webkit-transform: translateY(0);
   }
 
-  /* line 222, ../../sass/App/Nba/Nba.scss */
+  /* line 221, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -231,7 +230,7 @@
 }
 
 @-ms-keyframes loading_anim {
-  /* line 231, ../../sass/App/Nba/Nba.scss */
+  /* line 230, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -239,7 +238,7 @@
     -ms-transform: translateY(0);
   }
 
-  /* line 238, ../../sass/App/Nba/Nba.scss */
+  /* line 237, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;
@@ -249,7 +248,7 @@
 }
 
 @keyframes loading_anim {
-  /* line 247, ../../sass/App/Nba/Nba.scss */
+  /* line 246, ../../sass/App/Nba/Nba.scss */
   0% {
     width: 4px;
     height: 4px;
@@ -257,7 +256,7 @@
     transform: translateY(0);
   }
 
-  /* line 254, ../../sass/App/Nba/Nba.scss */
+  /* line 253, ../../sass/App/Nba/Nba.scss */
   100% {
     width: 10px;
     height: 10px;

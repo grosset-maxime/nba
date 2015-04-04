@@ -18,7 +18,7 @@ $_assets = array(
         // Vendors
         'vendor/jquery/jquery-2.0.0',
         'vendor/jquery-inherit/jquery-inherit',
-        '/vendor/curl/curl',
+        '/vendor/curl/curl-0.8.8',
 
         // App
         'App/start',

@@ -5,7 +5,7 @@
 
 curl([
     'jquery',
-    'App/Nba/Nba'
+    'Appx/Nba/Nba'
 ], function ($, Nba) {
     'use strict';
 

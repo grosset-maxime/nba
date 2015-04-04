@@ -151,13 +151,12 @@
 
     .ctn_loading {
         display: none;
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 550;
         text-align: center;
         width: 32px;
         height: 20px;
+        float: right;
+        margin-top: -22px;
+        margin-right: 3%;
 
         .el_loading {
             width: 4px;
