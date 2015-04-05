@@ -31,8 +31,8 @@ define('Appx/Cmp/History', [
          */
         defaultOptions: {
             className: '',
-            nba: 0,
-            rangeMax: 0,
+            randomNum: 0,
+            max: 0,
             basePath: '',
             randomFolder: '',
             view: VIEW_NUM,
@@ -43,14 +43,14 @@ define('Appx/Cmp/History', [
 
         /**
          * @constructor History.
-         * @param {Object} options                - Options values.
-         * @param {String} [options.className]    - Class name to add to Cmp.
-         * @param {Int}    [options.nba]          - Random num.
-         * @param {Int}    [options.rangeMax]     - Maximal range for random num.
-         * @param {String} [options.basePath]     - Base path for the random folder.
-         * @param {String} [options.randomFolder] - Random Folder name.
-         * @param {String} [options.view]         - Display view ('num' or 'folder').
-         * @param {String} [options.events]       - Available events for the Cmp.
+         * @param {Object}  options                - Options values.
+         * @param {String}  [options.className]    - Class name to add to Cmp.
+         * @param {Integer} [options.randomNum]    - Random num.
+         * @param {Integer} [options.max]          - Maximal range for random num.
+         * @param {String}  [options.basePath]     - Base path for the random folder.
+         * @param {String}  [options.randomFolder] - Random Folder name.
+         * @param {String}  [options.view]         - Display view ('num' or 'folder').
+         * @param {String}  [options.events]       - Available events for the Cmp.
          *
          * @param {Function} [options.events.click] - Fired on click on the Cmp.
          */
@@ -90,7 +90,7 @@ define('Appx/Cmp/History', [
             }).append(
                 $('<span>', {
                     'class': 'random_num',
-                    text: options.nba
+                    text: options.randomNum
                 }),
                 $('<span>', {
                     'class': 'separator',
@@ -98,7 +98,7 @@ define('Appx/Cmp/History', [
                 }),
                 $('<span>', {
                     'class': 'range_max',
-                    text: options.rangeMax
+                    text: options.max
                 })
             ).appendTo(ctn).hide();
 
@@ -106,7 +106,7 @@ define('Appx/Cmp/History', [
             els.randomFolder = $('<div>', {
                 'class': 'random_folder',
                 text: options.randomFolder,
-                title: options.nba + ' / ' + options.rangeMax,
+                title: options.randomNum + ' / ' + options.max,
             }).appendTo(ctn).hide();
 
             // Show the view define by options.

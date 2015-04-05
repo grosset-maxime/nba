@@ -56,11 +56,19 @@ $jsonResult = array(
 );
 
 $folders = array();
-$nbFolder = 0;
-$nba = 0;
+$nbFolders = 0;
+$randomNum = 0;
 $randomFolder = '';
 
-if ($basePath && !file_exists($basePath)) {
+
+if (!$basePath) {
+    $jsonResult['error'] = $logError;
+    $jsonResult['error']['mandatoryFieldsMissing'] = true;
+    print json_encode($jsonResult);
+    die;
+}
+
+if (!file_exists($basePath)) {
     $jsonResult['error'] = $logError;
     $jsonResult['error']['wrongBasePath'] = true;
     $jsonResult['error']['message'] = 'Wrong base path, it doesn\'t exist.';
@@ -68,29 +76,28 @@ if ($basePath && !file_exists($basePath)) {
     die;
 }
 
-if ($basePath) {
-    $folders = getFolderList($basePath);
+
+$folders = getFolderList($basePath);
+
+$nbFolders = count($folders);
+
+if (!$nbFolders) {
+    $jsonResult['error'] = $logError;
+    $jsonResult['error']['noFolder'] = true;
+    $jsonResult['error']['message'] = 'Path contains no folder.';
+    print json_encode($jsonResult);
+    die;
 }
 
-$nbFolder = count($folders);
-if ($nbFolder) {
-    $range['max'] = $nbFolder;
-}
+$randomNum = mt_rand(1, $nbFolders);
 
-if (!$range['min']) {
-    $range['min'] = 1;
-}
+$randomFolder = $folders[$randomNum - 1];
 
-$nba = mt_rand($range['min'], $range['max']);
-
-if ($nbFolder) {
-    $randomFolder = $folders[$nba - 1];
-}
-
-$jsonResult['success'] = true;
-$jsonResult['nba'] = $nba;
+$jsonResult['success']      = true;
+$jsonResult['basePath']     = $basePath;
+$jsonResult['randomNum']    = $randomNum;
 $jsonResult['randomFolder'] = $randomFolder;
-$jsonResult['rangeMax'] = $nbFolder;
+$jsonResult['nbFolders']    = $nbFolders;
 // $jsonResult['folders'] = $folders;
 
 print json_encode($jsonResult);

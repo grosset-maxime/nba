@@ -367,12 +367,55 @@ define([
             return $.trim(this.els.basePath.val());
         },
 
+        getRepPathInput: function () {
+            return $.trim(this.els.repPath.val());
+        },
+
         /**
          *
          */
         getRandomFolder: function () {
             var basePath,
                 that = this;
+
+            function onGetRandomFolder (json) {
+                var error, repPath,
+                    message = '';
+
+                if (json.error) {
+                    error = json.error;
+                    PM.log('Error : ' + (error.message || 'no error message available'));
+                    PM.log(error);
+
+                    if (error.mandatoryFieldsMissing) {
+                        message = 'Mandatory fields are missing.';
+                    } else if (error.wrongBasePath) {
+                        message = 'Wrong base path.';
+                    } else {
+                        message = 'Unknown error.';
+                    }
+
+                    PM.log(message);
+                    return false;
+                }
+
+                if (json.success) {
+
+                    that.nbRandomNum++;
+
+                    repPath = that.getRepPathInput();
+
+                    if (repPath) {
+                        json.basePath = repPath;
+                    }
+                    // json.basePath = that.basePath;
+
+                    that.setRandomView(json);
+                    that.addHistory(json);
+
+                    // PM.log(json.folders);
+                }
+            }
 
             basePath = that.basePath = that.getBasePathInput();
 
@@ -385,7 +428,7 @@ define([
 
             GetRandomAction.getRandomFolder({
                 basePath: basePath,
-                success: that.onGetRandomFolder.bind(that),
+                success: onGetRandomFolder,
                 failure: function () {
 
                 },
@@ -395,62 +438,32 @@ define([
             });
         },
 
-        onGetRandomFolder: function (json) {
-            var error,
-                that = this,
-                message = '';
-
-            if (json.error) {
-                error = json.error;
-                PM.log('Error : ' + (error.message || 'no error message available'));
-                PM.log(error);
-
-                if (error.mandatoryFieldsMissing) {
-                    message = 'Mandatory fields are missing.';
-                } else if (error.wrongBasePath) {
-                    message = 'Wrong base path.';
-                } else {
-                    message = 'Unknown error.';
-                }
-
-                PM.log(message);
-                return false;
-            }
-
-            if (json.success) {
-
-                that.nbRandomNum++;
-
-                json.basePath = that.basePath;
-
-                that.setRandomView(json);
-                that.addHistory(json);
-
-                // PM.log(json.folders);
-            }
-        },
-
         /**
-         *
+         * @param {Object}  options           - Options.
+         * @param {Boolean} options.isHistory - .
+         * @param {Integer} options.randomNum - .
+         * @param {Integer} options.max - .
+         * @param {String}  options.randomFolder - .
+         * @param {String}  options.basePath - .
          */
-        setRandomView: function (data) {
+        setRandomView: function (options) {
             var osSeparator, randomFolder, randomPathCtnWidth,
                 els = this.els,
                 randomPathCtn = els.randomPath,
                 randomPathCtnTemp = els.randomPathTemp;
 
-            if (data.isHistory) {
+            if (options.isHistory) {
                 els.randomNumCtn.addClass('is_history');
             } else {
                 els.randomNumCtn.removeClass('is_history');
             }
 
-            els.randomNum.text(data.nba);
-            els.rangeMaxNum.text(data.rangeMax);
+            els.randomNum.text(options.randomNum);
+            els.rangeMaxNum.text(options.nbFolders || options.max);
 
             osSeparator = Client.OS.win ? '\\' : '/';
 
-            randomFolder = data.basePath + osSeparator + data.randomFolder;
+            randomFolder = options.basePath + osSeparator + options.randomFolder;
 
             randomPathCtnTemp.show();
             randomPathCtn.hide();
@@ -475,8 +488,8 @@ define([
             options = options || {};
 
             history = new History({
-                nba: options.nba,
-                rangeMax: options.rangeMax,
+                randomNum: options.randomNum,
+                max: options.nbFolders || options.max,
                 basePath: options.basePath,
                 randomFolder: options.randomFolder,
                 view: currentHistoryView,
