@@ -98,7 +98,7 @@ define([
 
             mainCtn = $('<div>', {'class': 'nba flex_col'});
 
-            topCtn =  $('<div>', {'class': 'top'});
+            topCtn =  $('<div>', {'class': 'top flex_col'});
             middleCtn = $('<div>', {'class': 'middle flex_col'});
             bottomCtn = $('<div>', {'class': 'bottom flex_col'});
 

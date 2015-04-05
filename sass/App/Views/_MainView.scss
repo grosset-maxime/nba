@@ -12,15 +12,15 @@
     flex: 1;
     align-self: auto;
     min-width: 100%;
-    min-height: 40px;
-    max-height: 40px;
+    min-height: 70px;
+    max-height: 70px;
     padding: 0 10px;
     box-sizing: border-box;
 
     .base_path_ctn {
         order: 1;
         flex: 1;
-        min-width: 0;
+        min-width: 100%;
 
         .label {
             order: 1;
@@ -51,8 +51,7 @@
     .rep_path_ctn {
         order: 2;
         flex: 1;
-        min-width: 0;
-        margin-top: 8px;
+        min-width: 100%;
 
         .label {
             order: 1;
