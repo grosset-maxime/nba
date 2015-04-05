@@ -9,6 +9,7 @@ define([
     // PM
     'PM/Core',
     'PM/Utils/Client',
+    'PM/Cmp/Notify',
 
     // App
     'Appx/Cmp/History',
@@ -21,6 +22,7 @@ define([
 
     PM,
     Client,
+    Notify,
 
     History,
     GetRandomAction
@@ -64,6 +66,10 @@ define([
          *
          */
         histories: [],
+
+        _errorNotify: null,
+
+
 
         /**
          *
@@ -363,6 +369,30 @@ define([
             });
         },
 
+        /**
+         *
+         */
+        displayNotif: function (options) {
+            var that = this;
+
+            options = options || {};
+
+            if (!that._errorNotify) {
+                that._errorNotify = new Notify({
+                    className: 'nba_notify',
+                    container: $(document.body),
+                    autoHide: options.autoHide === false ? false : true,
+                    duration: options.duration || 3
+                });
+            }
+
+            that._errorNotify.setMessage(
+                options.message,
+                options.type || Notify.TYPE_ERROR,
+                true
+            );
+        }, // End function displayErrorNotify()
+
         getBasePathInput: function () {
             return $.trim(this.els.basePath.val());
         },
@@ -391,11 +421,18 @@ define([
                         message = 'Mandatory fields are missing.';
                     } else if (error.wrongBasePath) {
                         message = 'Wrong base path.';
+                    } else if (error.noFolder) {
+                        message = 'Folder contains no folder.';
                     } else {
                         message = 'Unknown error.';
                     }
 
                     PM.log(message);
+
+                    that.displayNotif({
+                        message: message
+                    });
+
                     return false;
                 }
 
@@ -421,6 +458,10 @@ define([
 
             if (!basePath) {
                 that.els.basePath.focus();
+                that.displayNotif({
+                    message: 'Please enter a base path.',
+                    type: Notify.TYPE_INFO
+                });
                 return;
             }
 
@@ -430,7 +471,9 @@ define([
                 basePath: basePath,
                 success: onGetRandomFolder,
                 failure: function () {
-
+                    that.displayNotif({
+                        message: 'Unknown error.'
+                    });
                 },
                 complete: function () {
                     that.hideLoading();
