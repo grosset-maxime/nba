@@ -108,6 +108,7 @@ class RandomFolder extends Root
 
             if (!$item->isDir()
                 || $item->isDot()
+                || $dirName === '@eaDir' // Syno folder
                 || preg_match('/^[\.].*/i', $dirName)
                 || preg_match('/^(thumb)(s)?[\.](db)$/i', $dirName)
             ) {
