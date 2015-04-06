@@ -409,31 +409,25 @@ define([
                 that = this;
 
             function onGetRandomFolder (json) {
-                var error, repPath,
-                    message = '';
+                var error, repPath, unknownErrorMessage;
 
                 if (json.error) {
-                    error = json.error;
-                    PM.log('Error : ' + (error.message || 'no error message available'));
+                    error = json.error || {};
+
+                    unknownErrorMessage = 'no error message available';
+
+                    PM.log('Error : ' + (error.message || unknownErrorMessage));
                     PM.log(error);
 
-                    if (error.mandatoryFieldsMissing) {
-                        message = 'Mandatory fields are missing.';
-                    } else if (error.wrongBasePath) {
-                        message = 'Wrong base path.';
-                    } else if (error.noFolder) {
-                        message = 'Folder contains no folder.';
-                    } else {
-                        message = 'Unknown error.';
-                    }
-
-                    PM.log(message);
-
                     that.displayNotif({
-                        message: message
+                        message: error.publicMessage || unknownErrorMessage,
+                        type: error.severity || Notify.TYPE_ERROR
                     });
 
-                    return false;
+                    PM.log('Error : ' + error.message || unknownErrorMessage);
+                    PM.log(error);
+
+                    return;
                 }
 
                 if (json.success) {

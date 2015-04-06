@@ -34,7 +34,7 @@ $_routes += array(
 $_routes += array(
     'getRandomFolder_s' => array(
         'isScript' => true,
-        'path' => '/api/script/getRandomFolder.php'
+        'path' => '/api/script/getRandomFolder_json.php'
     ),
 );
 
