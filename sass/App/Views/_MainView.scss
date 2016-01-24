@@ -12,8 +12,8 @@
     flex: 1;
     align-self: auto;
     min-width: 100%;
-    min-height: 70px;
-    max-height: 70px;
+    min-height: 80px;
+    max-height: 80px;
     padding: 0 10px;
     box-sizing: border-box;
 
@@ -76,6 +76,7 @@
         order: 2;
         flex: 0;
         min-width: 32px;
+        display: none;
     }
 
     .opts_btn {

@@ -55,7 +55,7 @@ $ANIM_DURATION_LA: 1s;
     }
 } // End .ctn_loading
 
-@-moz-keyframes $ANIM_NAME_LA {
+@-moz-keyframes loading_anim {
     0% {
         width: $WIDTH_START_LA;
         height: $WIDTH_START_LA;
@@ -73,7 +73,7 @@ $ANIM_DURATION_LA: 1s;
     }
 }
 
-@-webkit-keyframes $ANIM_NAME_LA {
+@-webkit-keyframes loading_anim {
     0% {
         width: $WIDTH_START_LA;
         height: $WIDTH_START_LA;
@@ -91,7 +91,7 @@ $ANIM_DURATION_LA: 1s;
     }
 }
 
-@keyframes $ANIM_NAME_LA {
+@keyframes loading_anim {
     0% {
         width: $WIDTH_START_LA;
         height: $WIDTH_START_LA;
