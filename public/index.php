@@ -111,6 +111,17 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
         $assetsRouteCss .= '<link rel="stylesheet" href="/css/' . $pathAsset . '.css" type="text/css" media="screen"/>';
     }
 }
+
+// Manage config js options
+// ------------------------
+$configAppJs = '';
+
+if (!empty($_config['js'])) {
+    foreach ($_config['js'] as $key => $property) {
+        $configAppJs .= $key . ': "' . $property . '",';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -145,6 +156,11 @@ if (!empty($_routes[$_r]['assets']) && !empty($_routes[$_r]['assets']['css'])) {
                 'PM': 'js/vendor/PM'
             }
         };
+
+        var configApp = {
+            <?php echo $configAppJs; ?>
+        };
+
         </script>
 
         <?php echo $assetsJs; ?>

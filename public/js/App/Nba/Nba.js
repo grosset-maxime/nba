@@ -39,7 +39,8 @@ define([
          */
         defaultOptions: {
             root: null,
-            basePath: ''
+            basePath: '',
+            repPath: ''
         },
 
         /**
@@ -51,6 +52,7 @@ define([
          *
          */
         basePath: '',
+        repPath: '',
 
         /**
          *
@@ -79,7 +81,8 @@ define([
 
             $.extend(true, that.options, that.defaultOptions, options || {});
 
-            that.basePath = that.options.basePath;
+            that.basePath = that.options.basePath || that.basePath;
+            that.repPath = that.options.repPath || that.repPath;
 
             that.buildSkeleton();
 
@@ -143,6 +146,7 @@ define([
                 'class': 'rep_path_input',
                 type: 'text',
                 placeholder: 'Replacement path',
+                value: that.repPath,
                 on: {
                     focus: function () {
                         that.hasBasePathFocus = true;

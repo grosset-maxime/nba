@@ -22,4 +22,9 @@ $_config = array(
 
     'log' => array(
     ),
+
+    'js' => array(
+        'basePath' => '',
+        'repPath' => '',
+    ),
 );

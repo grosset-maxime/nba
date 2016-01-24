@@ -1,6 +1,6 @@
 
 /*global
-    curl
+    curl, configApp
 */
 
 curl([
@@ -10,7 +10,10 @@ curl([
     'use strict';
 
     function initView () {
-        Nba.init();
+        Nba.init({
+            basePath: configApp.basePath,
+            repPath: configApp.repPath
+        });
     }
 
     initView();
