@@ -32,8 +32,13 @@ $logError;
 $jsonResult;
 $RandomPic; // Instance of RandomPic class.
 
+$request_body = file_get_contents('php://input');
+$data = json_decode($request_body);
+$basePath = !empty($data->basePath) ? trim($data->basePath) : '';
 
-$basePath = !empty($_POST['basePath']) ? trim($_POST['basePath']) : '';
+if (empty($basePath)) {
+    $basePath = !empty($_POST['basePath']) ? trim($_POST['basePath']) : '';
+}
 
 $logError = array(
     'mandatoryFields' => array(
@@ -73,6 +78,9 @@ try {
 }
 
 $jsonResult['success'] = true;
+
+header('Content-type: application/json');
+header('Accept: application/json');
 print json_encode($jsonResult);
 exit;
 
